@@ -911,3 +911,47 @@
     1. NotImplementedError isn't a subclass of StandardEror
     1. ArgumentError is a StandardEror
     1. Syntax Error is a subclass of StandardError
+
+1. A program looks like below
+
+    ```ruby
+    class Order
+      def initialize(discount)
+        @discount = discount
+      end
+
+      #... more code
+
+      def discount_value
+        discount.rate * total
+      end
+
+      attr_reader :discount
+    end
+    ```
+
+    The order may or may not have any discount, hence the code may fail when calling discount_value method.
+    What is the proper way to handle the nil value checking?
+
+    1. Use try `discount.try(:rate)`, it won't raise any error
+    1. Use `discount&.rate`, it won't raise any error
+    1. Use rescue `discount.rate rescue nil` to prevent error
+    1. All are correct, but prefer to use NullObject pattern
+
+1. If `Singleton` module is include in a class, this class can have maximum 1 object initialized.
+  
+    1. True
+    1. False
+
+1. Which statement is incorrect
+
+    1. Ruby supports Monkey patching
+    1. A monkey patch is a way for a program to extend or modify supporting system software locally (affecting only the running instance of the program). 
+    1. Monkey patch is a testing framework
+    1. The term monkey patch only refers to dynamic modifications of a class or module at runtime, motivated by the
+       intent to patch existing third-party code as a workaround to a bug or feature which does not act as desired.
+       Other forms of modifying classes at runtime have different names, based on their different intents.
+
+1. What is Singleton Class (not confuse with Singleton pattern)
+[Singleton class](https://dev.to/samuelfaure/explaining-ruby-s-singleton-class-eigenclass-to-confused-beginners-cep)
+
