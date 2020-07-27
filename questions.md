@@ -825,9 +825,13 @@
 
     1. 
         hello world 0
+
         hello world 1
+
         hello world 2
+
         hello world 3
+
         hello world 4
     1. 
         hello world 0 1 2 3 4 5
@@ -861,35 +865,35 @@
 
     What is the output?
 
-   1. Runtime error
-   1. [PClass, C1, C2]
-   1. [C1, C2]
-   1. []
+    1. Runtime error
+    1. [PClass, C1, C2]
+    1. [C1, C2]
+    1. []
 
 1. What is the main difference of alias_method and adding new alias method explicitly? 
 
-  1. The alias method doesn't add new object to the stacktrace
-  1. Alias method renames the source method
-  1. The syntax is shorter
-  1. Alias method isn't supported by Ruby.
+    1. The alias method doesn't add new object to the stacktrace
+    1. Alias method renames the source method
+    1. The syntax is shorter
+    1. Alias method isn't supported by Ruby.
 
 1. Consider the code below
 
-   ```ruby 
-   hash = Hash.new(0)
+    ```ruby 
+    hash = Hash.new(0)
 
-   hash[:foo] = 4
-   hash[:foo] += 1
+    hash[:foo] = 4
+    hash[:foo] += 1
 
-   hash[:bar] += 1
-   ```
+    hash[:bar] += 1
+    ```
 
-   What is the value of **hash** after running the code
+    What is the value of **hash** after running the code
 
-   1. { :foo => 5 }
-   1. { :foo => 5, :bar => nil }
-   1. { :foo => 5, :bar => 1 }
-   1. No method error
+    1. { :foo => 5 }
+    1. { :foo => 5, :bar => nil }
+    1. { :foo => 5, :bar => 1 }
+    1. No method error
 
 1. Below is the code of running a TCP server
 
