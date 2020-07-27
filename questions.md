@@ -267,6 +267,26 @@
         def A.class_method;end
       ```
 
+    1.
+      ```rb
+        class A
+        end
+
+        class << A
+          def self.class_method;end
+        end
+      ```
+
+    1.
+      ```rb
+        class A
+        end
+
+        class << A
+          def class_method;end
+        end
+      ```
+
 1. You are writing a program in Ruby. In this program, you have to provide the ability to create dog and cat. Dog and
    cat have 2 share routines includes eat and walk. You decide to add an abstract class Pet to handle the common logic.
    Which concept of OOP you are using in this design?
