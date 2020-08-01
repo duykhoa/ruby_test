@@ -1039,7 +1039,7 @@
     1. {20=>"buzz", 30=>"fizzbuzz", 11000001=>"fizz"}
     1. {30=>"fizzbuzz"}
 
-1. A colleague is adding this pattern
+1. A colleague wrote a program to calculate employee salary:
 
     ```ruby
       require 'forwardable'
@@ -1107,7 +1107,7 @@
 
     Which statement is correct?
 
-    1. Your colleague is using Delegation patter
+    1. Your colleague is using Delegation pattern.
       The business logic is abstract out from the basic entity which is Employee.
       It allows composition classes to reuse the code from the basic entity as writing in the inheritance way.
       The composition object hands the request for specific information back to the delegate object.
