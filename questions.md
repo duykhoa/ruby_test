@@ -467,7 +467,7 @@
     1. devil neve reven lived
     1. ["devil", "never", "even", "lived"]
 
-1. What is the most approriate solution with the `map` method in Enummerable
+1. What is the most approriate solution with the `map` method in Enumerable
 
     **E.g.**: Instead of calling `input_array.map { |item| item * 2 }`, we can use the method with this following syntax: 
     `map2(input_array) { |item| item * 2 }`
@@ -975,6 +975,158 @@
     1. The term monkey patch only refers to dynamic modifications of a class or module at runtime, motivated by the
        intent to patch existing third-party code as a workaround to a bug or feature which does not act as desired.
        Other forms of modifying classes at runtime have different names, based on their different intents.
+
+1. What method can we use to get the class of an object in Ruby
+
+    1. `#type`
+    1. `#object_id`
+    1. `#ancessors`
+    1. `#class`
+
+1. Given the code below
+
+    ```ruby
+    fib = Enumerator.new do |yielder|
+      a = b = 1
+      loop do
+        yielder << a
+        a, b = b, a + b
+      end
+    end
+    
+    ```
+
+    What is the output of `fib.take(5)`
+
+    1. 5
+    1. [1,1,2,3,5]
+    1. [5]
+    1. Runtime error
+
+1. What isn't an implementation of Ruby? 
+  
+    1. JRuby
+    1. mruby
+    1. CRuby
+    1. Rust
+
+1. Given the code below
+
+    ```ruby
+    fizzbuzz = Hash.new do |h, k|
+      if k % 15 == 0
+        h[k] = 'fizzbuzz'
+      elsif k % 3 == 0
+        h[k] = 'fizz'
+      elsif k % 5 == 0
+        h[k] = 'buzz'
+      else
+        h[k] = k
+      end
+    end
+
+    fizzbuzz[20]
+    fizzbuzz[30]
+    fizzbuzz[11000001]
+
+    puts fizzbuzz.inspect
+    ```
+
+    What is the output?
+
+    1. {}
+    1. {11000001=>"fizz"}
+    1. {20=>"buzz", 30=>"fizzbuzz", 11000001=>"fizz"}
+    1. {30=>"fizzbuzz"}
+
+1. A colleague is adding this pattern
+
+    ```ruby
+      require 'forwardable'
+
+      class Decorator
+        extend Forwardable
+
+        def self.decorate(obj)
+          new(obj)
+        end
+
+        def initialize(obj)
+          @obj = obj
+        end
+      end
+
+      class Employee
+        def initialize(base_salary)
+          @base_salary = base_salary
+        end
+
+        attr_reader :base_salary
+      end
+
+      class BaseSalaryCalculatorDecorator < Decorator
+        def calculate
+          @obj.base_salary
+        end
+
+        def_delegators :@obj, :base_salary
+      end
+
+      class SalaryAfterIncomeTaxDecorator < Decorator
+        def calculate
+          (1 - tax_rate) * @obj.calculate
+        end
+
+        def tax_rate
+          0.2
+        end
+
+        def_delegators :@obj, :base_salary
+      end
+
+      class SalaryWithBonusDecorator < Decorator
+        def calculate
+          @obj.calculate + bonus
+        end
+
+        def bonus
+          @obj.base_salary >= 1700 ? 2 * @obj.base_salary : @obj.base_salary
+        end
+
+        def_delegators :@obj, :base_salary
+      end
+
+      employee = Employee.new(2000)
+
+      base_salary_decorator   = BaseSalaryCalculatorDecorator.decorate(employee)
+      salary_with_bonus       = SalaryWithBonusDecorator.decorate(base_salary_decorator)
+      salary_after_income_tax = SalaryAfterIncomeTaxDecorator.decorate(salary_with_bonus)
+
+      puts salary_after_income_tax.calculate
+    ```
+
+    Which statement is correct?
+
+    1. Your colleague is using Delegation patter
+      The business logic is abstract out from the basic entity which is Employee.
+      It allows composition classes to reuse the code from the basic entity as writing in the inheritance way.
+      The composition object hands the request for specific information back to the delegate object.
+      The output is 2000
+
+    1. Your colleague is using Flyweight Pattern.
+      The design helps to minimize the memory usage by sharing as much as data to similar objects; it is a way to use
+      objects in a large numbers when a simple repeated representation would use an unacceptable amount of memory.
+      The output is 4800
+
+    1. Your colleague is using Decorator Pattern.
+      The business logic is splited to multiple classes, each of them are handle a small piece of the
+      business logic. Each class has a readable name, hence self explanary it responsiblity.
+      This pattern helps in making the code to follow Single Responsibility Principle as it allows functionality to be
+      devided between classes with unique area of concerns. The output is 4800
+
+    1. Your colleague is using a behavior design pattern call Template method. It introduces a templating method in the
+       super class, and defines the skeleton of an sequence of actions to achieve a business goal in term of high level concept.
+       The action themselves are implemented by additional helper methods. The output is 6000
 
 1. What is Singleton Class (not confuse with Singleton pattern)
 [Singleton class](https://dev.to/samuelfaure/explaining-ruby-s-singleton-class-eigenclass-to-confused-beginners-cep)
